@@ -6,7 +6,7 @@
 // Sets default values
 AMovingPlataform::AMovingPlataform()
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+ 	// Set this actor to c	all Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
 }
@@ -15,7 +15,19 @@ AMovingPlataform::AMovingPlataform()
 void AMovingPlataform::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
+	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red,"Welcome to Obstacle Assault!!");
+
+	MyInt = 9;
+
+	APlusB = InputA + InputB;
+
+	APlusBFloat = InputAFloat + InputBFloat;
+
+	MyX = MyVector.X;
+
+	MyVector.X = MyVector.Z;
+	MyVector.Z = MyX;
 }
 
 // Called every frame
