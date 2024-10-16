@@ -23,37 +23,18 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	UPROPERTY(EditAnywhere)
-	int32 MyInt = 50;
+	UPROPERTY(EditAnywhere, Category="Movement")
+	FVector Direction = FVector(1, 0, 0);
 
+	UPROPERTY(EditAnywhere, Category="Movement")
+	float Speed = 100;
 
-	UPROPERTY(EditAnyWhere)
-	int32 InputA = 0;
-	
-	UPROPERTY(EditAnyWhere)
-	int32 InputB = 0;
-	
-	UPROPERTY(EditAnyWhere)
-	int32 APlusB = 0;
+	UPROPERTY(EditAnywhere, Category="Movement")
+	float MaxDistance = 500;
 
-	UPROPERTY(EditAnyWhere)
-	float MyFloat = 4.25;
+	UPROPERTY(VisibleAnywhere, Category="Movement")
+	FVector StartLocation;
 
-	UPROPERTY(EditAnywhere)
-	float InputAFloat = 0;
-
-	UPROPERTY(EditAnywhere)
-	float InputBFloat = 0;
-
-	UPROPERTY(EditAnywhere)
-	float APlusBFloat;
-
-	UPROPERTY(EditAnywhere)
-	bool MyBool = true;
-
-	UPROPERTY(EditAnywhere)
-	FVector MyVector = FVector(5, 2, 3);
-
-	UPROPERTY(EditAnyWhere)
-	float MyX = 0;
+	UPROPERTY(VisibleAnywhere, Category="Movement")
+	float DistanceMoved = 0;
 };

@@ -17,17 +17,8 @@ void AMovingPlataform::BeginPlay()
 	Super::BeginPlay();
 
 	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red,"Welcome to Obstacle Assault!!");
-
-	MyInt = 9;
-
-	APlusB = InputA + InputB;
-
-	APlusBFloat = InputAFloat + InputBFloat;
-
-	MyX = MyVector.X;
-
-	MyVector.X = MyVector.Z;
-	MyVector.Z = MyX;
+	
+	StartLocation = GetActorLocation();
 }
 
 // Called every frame
@@ -35,5 +26,17 @@ void AMovingPlataform::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-}
+	FVector CurrentLocation = GetActorLocation();
+	
+	CurrentLocation += Direction * Speed * DeltaTime;
+	
+	SetActorLocation(CurrentLocation);
 
+	DistanceMoved = FVector::Dist(StartLocation, CurrentLocation);
+
+	if (DistanceMoved > MaxDistance) {
+		Direction.X = -Direction.X;
+
+		StartLocation = CurrentLocation;
+	}
+}
