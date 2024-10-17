@@ -25,6 +25,7 @@ void AMovingPlataform::BeginPlay()
 	UE_LOG(LogTemp, Display, TEXT("This is a display message!"));
 	UE_LOG(LogTemp, Warning, TEXT("This is a warning message!"));
 
+	FString ActorName = GetName();
 	UE_LOG(LogTemp, Display, TEXT("%s max move distance: %.2f"), *ActorName, MaxMoveDistance);
 }
 
@@ -44,6 +45,7 @@ void AMovingPlataform::Tick(float DeltaTime)
 	if (DistanceMoved > MaxMoveDistance) {
 		float OverShoot = DistanceMoved - MaxMoveDistance;
 
+		FString ActorName = GetName();
 		UE_LOG(LogTemp, Display, TEXT("%s overshoot: %.2f"), *ActorName, OverShoot);
 			
 		FVector MoveDirection = PlataformVelocity.GetSafeNormal();
