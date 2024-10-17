@@ -23,6 +23,7 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+private:
 	UPROPERTY(EditAnywhere, Category="Movement Properties")
 	FVector PlataformVelocity = FVector(100, 0, 0);
 
@@ -34,4 +35,8 @@ public:
 
 	UPROPERTY(VisibleAnywhere, Category="Movement Debug")
 	float DistanceMoved = 0;
+	
+	// Functions
+	void MovePlataform(float DeltaTime);
+	void RotatePlataform(float DeltaTime);
 };
