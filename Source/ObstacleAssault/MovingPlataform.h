@@ -34,4 +34,6 @@ public:
 
 	UPROPERTY(VisibleAnywhere, Category="Movement Debug")
 	float DistanceMoved = 0;
+
+	FString ActorName = GetName();
 };

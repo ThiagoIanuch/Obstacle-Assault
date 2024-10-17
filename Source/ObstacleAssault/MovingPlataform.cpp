@@ -17,8 +17,15 @@ void AMovingPlataform::BeginPlay()
 	Super::BeginPlay();
 
 	//GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red,"Welcome to Obstacle Assault!!");
-	
+
 	StartLocation = GetActorLocation();
+
+	// Show different debug messages
+	UE_LOG(LogTemp, Error, TEXT("This is an error message!"));
+	UE_LOG(LogTemp, Display, TEXT("This is a display message!"));
+	UE_LOG(LogTemp, Warning, TEXT("This is a warning message!"));
+
+	UE_LOG(LogTemp, Display, TEXT("%s max move distance: %.2f"), *ActorName, MaxMoveDistance);
 }
 
 // Called every frame
@@ -35,6 +42,10 @@ void AMovingPlataform::Tick(float DeltaTime)
 	DistanceMoved = FVector::Dist(StartLocation, CurrentLocation);
 
 	if (DistanceMoved > MaxMoveDistance) {
+		float OverShoot = DistanceMoved - MaxMoveDistance;
+
+		UE_LOG(LogTemp, Display, TEXT("%s overshoot: %.2f"), *ActorName, OverShoot);
+			
 		FVector MoveDirection = PlataformVelocity.GetSafeNormal();
 	
 		StartLocation = StartLocation + MoveDirection * MaxMoveDistance;
