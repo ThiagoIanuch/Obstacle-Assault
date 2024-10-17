@@ -32,11 +32,12 @@ private:
 
 	UPROPERTY(VisibleAnywhere, Category="Movement Debug")
 	FVector StartLocation;
-
-	UPROPERTY(VisibleAnywhere, Category="Movement Debug")
-	float DistanceMoved = 0;
 	
-	// Functions
 	void MovePlataform(float DeltaTime);
+
 	void RotatePlataform(float DeltaTime);
+
+	bool ShouldPlataformReturn() const;
+
+	float GetDistanceMoved() const;
 };

@@ -20,7 +20,6 @@ void AMovingPlataform::BeginPlay()
 
 	StartLocation = GetActorLocation();
 
-	// Show different debug messages
 	UE_LOG(LogTemp, Error, TEXT("This is an error message!"));
 	UE_LOG(LogTemp, Display, TEXT("This is a display message!"));
 	UE_LOG(LogTemp, Warning, TEXT("This is a warning message!"));
@@ -34,38 +33,44 @@ void AMovingPlataform::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-
 	MovePlataform(DeltaTime);
 	RotatePlataform(DeltaTime);
 }
 
 void AMovingPlataform::MovePlataform(float DeltaTime) 
 {
-	FVector CurrentLocation = GetActorLocation();
-	
-	CurrentLocation += PlataformVelocity * DeltaTime;
-	
-	SetActorLocation(CurrentLocation);
-
-	DistanceMoved = FVector::Dist(StartLocation, CurrentLocation);
-
-	if (DistanceMoved > MaxMoveDistance) {
-		float OverShoot = DistanceMoved - MaxMoveDistance;
-
+	if (ShouldPlataformReturn()) 
+	{
+		float OverShoot = GetDistanceMoved() - MaxMoveDistance;
 		FString ActorName = GetName();
 		UE_LOG(LogTemp, Display, TEXT("%s overshoot: %.2f"), *ActorName, OverShoot);
 			
 		FVector MoveDirection = PlataformVelocity.GetSafeNormal();
-	
 		StartLocation = StartLocation + MoveDirection * MaxMoveDistance;
 
 		SetActorLocation(StartLocation);
-
 		PlataformVelocity = -PlataformVelocity;
+	}
+	else 
+	{
+		FVector CurrentLocation = GetActorLocation();
+		CurrentLocation += PlataformVelocity * DeltaTime;
+
+		SetActorLocation(CurrentLocation);
 	}
 }
 
 void AMovingPlataform::RotatePlataform(float DeltaTime) 
 {
+	//
+}
 
+bool AMovingPlataform::ShouldPlataformReturn() const 
+{
+	return GetDistanceMoved() > MaxMoveDistance;
+}
+
+float AMovingPlataform::GetDistanceMoved() const
+{
+	return FVector::Dist(StartLocation, GetActorLocation());
 }
