@@ -6,7 +6,7 @@
 // Sets default values
 AMovingPlataform::AMovingPlataform()
 {
- 	// Set this actor to c	all Tick() every frame.  You can turn this off to improve performance if you don't need it.
+ 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
 }
@@ -62,7 +62,7 @@ void AMovingPlataform::MovePlataform(float DeltaTime)
 
 void AMovingPlataform::RotatePlataform(float DeltaTime) 
 {
-	//
+	AddActorLocalRotation(RotationVelocity * DeltaTime);
 }
 
 bool AMovingPlataform::ShouldPlataformReturn() const 

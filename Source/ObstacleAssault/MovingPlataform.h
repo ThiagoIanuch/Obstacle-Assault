@@ -30,9 +30,11 @@ private:
 	UPROPERTY(EditAnywhere, Category="Movement Properties")
 	float MaxMoveDistance = 500;
 
-	UPROPERTY(VisibleAnywhere, Category="Movement Debug")
 	FVector StartLocation;
 	
+	UPROPERTY(EditAnywhere, Category="Rotation Properties")
+	FRotator RotationVelocity;
+
 	void MovePlataform(float DeltaTime);
 
 	void RotatePlataform(float DeltaTime);
